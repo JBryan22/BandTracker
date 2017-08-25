@@ -97,7 +97,7 @@ namespace BandTracker.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM bands;";
+      cmd.CommandText = @"DELETE FROM bands; DELETE FROM bands_venues;";
 
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -109,7 +109,7 @@ namespace BandTracker.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM bands WHERE id = @id;";
+      cmd.CommandText = @"DELETE FROM bands WHERE id = @id; DELETE FROM bands_venues WHERE band_id = @id;";
 
       MySqlParameter BandId = new MySqlParameter();
       BandId.ParameterName = "@id";
@@ -154,7 +154,7 @@ namespace BandTracker.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE Bands SET name = @name WHERE id = @id;";
+      cmd.CommandText = @"UPDATE bands SET name = @name WHERE id = @id;";
 
       MySqlParameter nameParameter = new MySqlParameter();
       nameParameter.ParameterName = "@name";
@@ -170,45 +170,39 @@ namespace BandTracker.Models
       conn.Close();
     }
 
-    public void AddBook(Book newBook)
+    public void AddVenue(Venue newVenue)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO bands_books (Band_id, book_id) VALUES (@BandId, @bookId);";
+      cmd.CommandText = @"INSERT INTO bands_venues (band_id, venue_id) VALUES (@BandId, @VenueId);";
 
       MySqlParameter BandId = new MySqlParameter();
       BandId.ParameterName = "@BandId";
       BandId.Value = _id;
       cmd.Parameters.Add(BandId);
 
-      MySqlParameter bookId = new MySqlParameter();
-      bookId.ParameterName = "@bookId";
-      bookId.Value = newBook.GetId();
-      cmd.Parameters.Add(bookId);
+      MySqlParameter VenueId = new MySqlParameter();
+      VenueId.ParameterName = "@VenueId";
+      VenueId.Value = newVenue.GetId();
+      cmd.Parameters.Add(VenueId);
 
       cmd.ExecuteNonQuery();
       conn.Close();
     }
 
-    public List<Book> GetBooks()
+    public List<Venue> GetVenues()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT books.*
+      cmd.CommandText = @"SELECT venues.*
       FROM bands
-      JOIN Bands_books ON (Bands.id = Bands_books.Band_id)
-      JOIN books ON (books.id = Bands_books.book_id)
-      WHERE Bands.id = @BandId;";
-
-      // @"SELECT books.*
-      // FROM books
-      // JOIN Bands_books ON (books.id = Bands_books.book_id)
-      // JOIN Bands ON (Bands_books.Band_id = Bands.id)
-      // WHERE Bands.id = @BandId;";
+      JOIN bands_venues ON (bands.id = bands_venues.band_id)
+      JOIN venues ON (venues.id = bands_venues.venue_id)
+      WHERE bands.id = @BandId;";
 
       MySqlParameter BandId = new MySqlParameter();
       BandId.ParameterName = "@BandId";
@@ -216,17 +210,17 @@ namespace BandTracker.Models
       cmd.Parameters.Add(BandId);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      List<Book> allBooks = new List<Book>{};
+      List<Venue> allVenues = new List<Venue>{};
 
       while(rdr.Read())
       {
         int id = rdr.GetInt32(0);
-        string title = rdr.GetString(1);
-        Book newBook = new Book(title, id);
-        allBooks.Add(newBook);
+        string name = rdr.GetString(1);
+        Venue newVenue = new Venue(name, id);
+        allVenues.Add(newVenue);
       }
       conn.Close();
-      return allBooks;
+      return allVenues;
     }
   }
 }

@@ -1,0 +1,8 @@
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\bin\Debug\netcoreapp1.1\BandTracker.deps.json
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\bin\Debug\netcoreapp1.1\BandTracker.runtimeconfig.json
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\bin\Debug\netcoreapp1.1\BandTracker.runtimeconfig.dev.json
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\obj\Debug\netcoreapp1.1\BandTracker.AssemblyInfo.cs
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\bin\Debug\netcoreapp1.1\BandTracker.dll
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\bin\Debug\netcoreapp1.1\BandTracker.pdb
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\obj\Debug\netcoreapp1.1\BandTracker.dll
+C:\Users\Jesse\Desktop\CSharp Epicodus\BandTracker.Solution\BandTracker\obj\Debug\netcoreapp1.1\BandTracker.pdb

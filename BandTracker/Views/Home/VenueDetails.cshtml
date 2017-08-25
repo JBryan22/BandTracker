@@ -1,0 +1,59 @@
+@{
+    Layout = "_Layout";
+}
+
+<h1 class="header">@Model["venue"].GetName()</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="container detail-contain">
+            @if (@Model["venue"].GetBands().Count == 0 || @Model == null)
+            {
+                <h3>We currently dont have any info on where @Model["venue"].GetName() has played. Please add venue information below.</h3>
+            }
+            else
+            {
+
+                <h3 class="header">Bands @Model["venue"].GetName() that have played here!</h3>
+                    <div class="well">
+                        <ul>
+                            @foreach(var band in @Model["venue"].GetBands())
+                            {
+                                <li class="list"><a href="/band/@band.GetId()">@band.GetName()</a></li>
+                            }
+                        </ul>
+                    </div>
+                
+                <a href='/venues/@Model["venue"].GetId()/delete' class="btn btn-danger">Delete This Venue</a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="add-select">
+            <h4 class="mini-header">Add A Venue That @Model["band"].GetName() Has Played At!</h4>
+            <div class="container form-group">
+                <form action='/venue/@Model["venue"].GetId()' method="post">
+                <label for="band"><h5>Select From List Of Bands:</h5></label>
+                <select class="selectpicker form-control" name="band">
+                    @foreach(var band in @Model["bands"])
+                    {
+                    <option value="@band.GetId()">@band.GetName()</option>
+                    }
+                </select>
+                <button type="submit" name="button" class="btn btn-default">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 footer">
+        <a href='/bands/@Model["band"].GetId()/delete' class="btn btn-danger add-button">Delete This Band</a>
+    </div>
+</div>
+
+</div>

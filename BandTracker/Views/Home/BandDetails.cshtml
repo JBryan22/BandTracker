@@ -1,0 +1,57 @@
+@{
+    Layout = "_Layout";
+}
+
+<body id="band-details">
+<h1 class="header">@Model["band"].GetName()</h1>
+
+<div class="container detail-contain">
+    <div class="row">
+        <div class="col-md-12">
+            @if (@Model["band"].GetVenues().Count == 0 || @Model == null)
+            {
+                <h3 class="header">We currently dont have any info on where @Model["band"].GetName() has played. Please add venue information below.</h3>
+            }
+            else
+            {
+                <h3 class="header">Venues @Model["band"].GetName() has played at!</h3>
+                <div class="well">
+                    <ul>
+                        @foreach(var venue in @Model["band"].GetVenues())
+                        {
+                            <li class="list"><a href="/venue/@venue.GetId()">@venue.GetName()</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="add-select">
+                <h4 class="mini-header">Add A Venue That @Model["band"].GetName() Has Played At!</h4>
+                <div class="container form-group">
+                    <form action='/band/@Model["band"].GetId()' method="post">
+                    <label for="venue"><h5>Select From List Of Venues:</h5></label>
+                    <select class="selectpicker form-control" name="venue">
+                        @foreach(var venue in @Model["venues"])
+                        {
+                        <option value="@venue.GetId()">@venue.GetName()</option>
+                        }
+                    </select>
+                    <button type="submit" name="button" class="btn btn-default add-button">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 footer">
+            <a href='/bands/@Model["band"].GetId()/delete' class="btn btn-danger">Delete This Band</a>
+        </div>
+    </div>
+
+</div>
+</body>

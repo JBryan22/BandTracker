@@ -1,0 +1,25 @@
+@{
+    Layout = "_Layout";
+}
+
+<body id="band-list">
+<h1 class="header">Bands Being Tracked:</h1>
+
+<div class="container">
+    @if (@Model.Count == 0 || @Model == null)
+    {
+        <h3 class="header">There are currently no bands being tracked!</h3>
+    }
+    else
+    {
+        <div class="well">
+        <ul>
+            @foreach(var band in @Model)
+            {
+                <li class="list"><a href="/band/@band.GetId()">@band.GetName()</a></li>
+            }
+        </ul>
+        </div>
+    }
+</div>
+</body>
