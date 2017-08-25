@@ -33,7 +33,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="add-select">
-            <h4 class="mini-header">Add A Venue That @Model["band"].GetName() Has Played At!</h4>
+            <h4 class="mini-header">Add A Band That Has Played At @Model["venue"].GetName()!</h4>
             <div class="container form-group">
                 <form action='/venue/@Model["venue"].GetId()' method="post">
                 <label for="band"><h5>Select From List Of Bands:</h5></label>
@@ -52,7 +52,7 @@
 
 <div class="row">
     <div class="col-md-12 footer">
-        <a href='/bands/@Model["band"].GetId()/delete' class="btn btn-danger add-button">Delete This Band</a>
+        <a href='/venues/@Model["venue"].GetId()/delete' class="btn btn-danger add-button">Delete This Venue</a>
     </div>
 </div>
 
