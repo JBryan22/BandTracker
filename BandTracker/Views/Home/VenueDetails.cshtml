@@ -4,12 +4,13 @@
 
 <h1 class="header">@Model["venue"].GetName()</h1>
 
+<div class="container">
 <div class="row">
     <div class="col-md-12">
         <div class="container detail-contain">
             @if (@Model["venue"].GetBands().Count == 0 || @Model == null)
             {
-                <h3>We currently dont have any info on where @Model["venue"].GetName() has played. Please add venue information below.</h3>
+                <h3>We currently dont have any info on who has played at @Model["venue"].GetName(). Please add concert information below.</h3>
             }
             else
             {
@@ -24,7 +25,6 @@
                         </ul>
                     </div>
                 
-                <a href='/venues/@Model["venue"].GetId()/delete' class="btn btn-danger">Delete This Venue</a>
             }
         </div>
     </div>
@@ -43,10 +43,16 @@
                     <option value="@band.GetId()">@band.GetName()</option>
                     }
                 </select>
-                <button type="submit" name="button" class="btn btn-default">Add</button>
+                <button type="submit" name="button" class="btn btn-default add-button">Add</button>
                 </form>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 footer">
+        <a href='/venues/@Model["venue"].GetId()/update' class="btn btn-default add-button">Update This Venue</a>
     </div>
 </div>
 
@@ -56,4 +62,4 @@
     </div>
 </div>
 
-</div>
+</div>>

@@ -79,7 +79,7 @@ namespace BandTracker.Controllers
           return View("VenueList", Venue.GetAll());
       }
 
-      [HttpPost("band/{id}")]
+      [HttpPost("/band/{id}")]
       public ActionResult BandDetailAdd(int id)
       {
           var model = new Dictionary<string,object>();
@@ -93,7 +93,7 @@ namespace BandTracker.Controllers
           return View("BandDetails", model);
       }
 
-      [HttpPost("venue/{id}")]
+      [HttpPost("/venue/{id}")]
       public ActionResult VenueDetailAdd(int id)
       {
           var model = new Dictionary<string,object>();
@@ -107,7 +107,7 @@ namespace BandTracker.Controllers
           return View("VenueDetails", model);
       }
 
-      [HttpGet("bands/{id}/delete")]
+      [HttpGet("/bands/{id}/delete")]
       public ActionResult BandDelete(int id)
       {
           var foundBand = Band.Find(id);
@@ -116,11 +116,26 @@ namespace BandTracker.Controllers
           return View("BandList", Band.GetAll());
       }
 
-      [HttpGet("venues/{id}/delete")]
+      [HttpGet("/venues/{id}/delete")]
       public ActionResult VenueDelete(int id)
       {
           var foundVenue = Venue.Find(id);
           foundVenue.Delete();
+
+          return View("VenueList", Venue.GetAll());
+      }
+
+      [HttpGet("venues/{id}/update")]
+      public ActionResult VenueUpdate(int id)
+      {
+          return View(Venue.Find(id));
+      }
+
+      [HttpPost("/venues/{id}/update")]
+      public ActionResult VenueUpdatePost(int id)
+      {
+          var foundVenue = Venue.Find(id);
+          foundVenue.Update(Request.Form["venue-name"]);
 
           return View("VenueList", Venue.GetAll());
       }
